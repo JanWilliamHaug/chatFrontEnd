@@ -3,6 +3,10 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './App.css';
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function App() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
@@ -25,7 +29,12 @@ function App() {
 
     try {
       const res = await fetch('https://chat-back-end-blush.vercel.app/chatbot/message', requestOptions);
-      const data = await res.json(); 
+      const data = await res.json();
+      setMessages([...messages, { text: input, sender: 'user' }]);
+
+      // Simulate Hikari typing by waiting for a short delay
+      await sleep(1000); // Adjust this value for the desired typing delay
+
       setMessages([...messages, { text: input, sender: 'user' }, { text: data.response, sender: 'chatbot' }]);
       setInput('');
     } catch (error) {
