@@ -33,7 +33,7 @@ function App() {
       setMessages([...messages, { text: input, sender: 'user' }]);
 
       // Simulate Hikari typing by waiting for a short delay
-      await sleep(1000); // Adjust this value for the desired typing delay
+      await sleep(600); // Adjust this value for the desired typing delay
 
       setMessages([...messages, { text: input, sender: 'user' }, { text: data.response, sender: 'chatbot' }]);
       setInput('');
