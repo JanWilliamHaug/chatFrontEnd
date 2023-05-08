@@ -24,7 +24,7 @@ function App() {
     };
 
     try {
-      const res = await fetch('https://chat-back-end-blush.vercel.app/', requestOptions);
+      const res = await fetch('https://chat-back-end-blush.vercel.app/chatbot/message', requestOptions);
       const data = await res.json();
       setMessages([...messages, { text: input, sender: 'user' }, { text: data.response, sender: 'chatbot' }]);
       setInput('');
