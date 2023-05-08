@@ -37,7 +37,7 @@ function App() {
     <div className="chatbot-container">
       <div className="chatbot-header">
         <img src="https://www.kindpng.com/picc/m/24-241830_mq-girl-pokemon-chibi-pikachu-cute-chibi-anime.png" alt="Cute anime character" style={{ width: '100px', height: '100px' }}></img>
-        <h1 className="chatbot-title">Caring Companion</h1>
+        <h1 className="chatbot-title">Magic Shop with Hikari</h1>
       </div>
       <div className="chatbot-body">
         <div className="chat-messages" ref={chatMessagesRef}>
