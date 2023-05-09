@@ -9,7 +9,12 @@ function sleep(ms) {
 
 function App() {
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([
+    {
+      text: "Hi William's dear friend, how are you today?",
+      sender: 'chatbot',
+    },
+  ]);
   const chatMessagesRef = useRef(null);
 
   useEffect(() => {
