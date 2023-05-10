@@ -3,11 +3,16 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './App.css';
 
+// Add these imports to the top of the file
+import Register from './components/Register';
+import Login from './components/Login';
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function App() {
+  
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([
     {
@@ -15,6 +20,7 @@ function App() {
       sender: 'chatbot',
     },
   ]);
+  
   const chatMessagesRef = useRef(null);
 
   useEffect(() => {
@@ -46,6 +52,18 @@ function App() {
       console.error('Error:', error);
     }
   };
+  
+  // Conditionally render components based on the token
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    return (
+      <div>
+        <Register />
+        <Login />
+      </div>
+    );
+  }
 
   return (
     <div className="chatbot-container">
