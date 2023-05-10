@@ -10,21 +10,19 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
   
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, email, password }),
-    };
-    
     console.log("Sending data to the server:", { username, email, password });
 
-    try {
-      const res = await fetch('https://chat-back-end-blush.vercel.app/auth/register', requestOptions);
-      const data = await res.json();
-  
-      if (data.message) {
-        alert(data.message);
-      }
+  try {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, email, password }),
+    });
+
+
+    
     } catch (error) {
       console.error('Error:', error);
     }
