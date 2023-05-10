@@ -9,17 +9,19 @@ function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
+  
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, email, password }),
     };
+    
+    console.log("Sending data to the server:", { username, email, password });
 
     try {
       const res = await fetch('https://chat-back-end-blush.vercel.app/auth/register', requestOptions);
       const data = await res.json();
-
+  
       if (data.message) {
         alert(data.message);
       }
@@ -27,6 +29,8 @@ function Register() {
       console.error('Error:', error);
     }
   };
+  
+  
 
   return (
     <div className="auth-container">
@@ -51,6 +55,7 @@ function Register() {
         <TextField
           label="Password"
           type="password"
+          autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           fullWidth
