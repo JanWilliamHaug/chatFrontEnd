@@ -31,7 +31,7 @@ function Register() {
   return (
     <div className="auth-container">
       <h2>Register</h2>
-      <form onSubmit={handleRegister} className="auth-form">
+      <form onSubmit={handleRegister} className="auth-form register-form">
         <TextField
           label="Username"
           value={username}
