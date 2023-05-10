@@ -11,22 +11,28 @@ function Register() {
     e.preventDefault();
   
     console.log("Sending data to the server:", { username, email, password });
-
-  try {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, email, password }),
-    });
-
-
-    
+  
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        console.log("Registration successful:", data);
+      } else {
+        console.error("Server error:", data);
+      }
     } catch (error) {
       console.error('Error:', error);
     }
   };
+  
   
   
 
