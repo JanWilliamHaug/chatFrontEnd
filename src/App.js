@@ -62,9 +62,10 @@ function App() {
     </Button>
   );
 
+
   return (
     <div className="chatbot-container">
-      {authButton}
+    {authButton}
       {showAuth && (
         <div>
           <Register />
@@ -72,10 +73,43 @@ function App() {
         </div>
       )}
       <div className="chatbot-header">
-        {/* ... rest of the code */}
+        <img src="https://www.kindpng.com/picc/m/24-241830_mq-girl-pokemon-chibi-pikachu-cute-chibi-anime.png" alt="Cute anime character" style={{ width: '100px', height: '100px' }}></img>
+        <h1 className="chatbot-title">Magic Shop with Hikari</h1>
       </div>
       <div className="chatbot-body">
-        {/* ... rest of the code */}
+        <div className="chat-messages" ref={chatMessagesRef}>
+          {messages.map((message, index) => (
+            <div className={`chat-message ${message.sender}`} key={index}>
+              {message.sender === 'chatbot' && (
+                <img
+                  src="https://www.kindpng.com/picc/m/24-241830_mq-girl-pokemon-chibi-pikachu-cute-chibi-anime.png"
+                  alt="Cute anime character"
+                  className="chatbot-avatar"
+                />
+              )}
+              <p>{message.text}</p>
+            </div>
+          ))}
+        </div>
+        <form onSubmit={handleMessage} className="chatbot-form">
+          <TextField
+            label="Your message"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            fullWidth
+            margin="normal"
+            variant="outlined"
+            InputProps={{
+              style: {
+                background: '#fff',
+                borderRadius: '24px',
+              },
+            }}
+          />
+          <Button variant="contained" color="primary" type="submit" disableElevation>
+            Send
+          </Button>
+        </form>
       </div>
     </div>
   );
