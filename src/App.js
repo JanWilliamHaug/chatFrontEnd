@@ -3,7 +3,6 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './App.css';
 
-// Add these imports to the top of the file
 import Register from './components/Register';
 import Login from './components/Login';
 
@@ -12,7 +11,6 @@ function sleep(ms) {
 }
 
 function App() {
-  
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([
     {
@@ -20,7 +18,9 @@ function App() {
       sender: 'chatbot',
     },
   ]);
-  
+
+  const [showAuth, setShowAuth] = useState(false);
+
   const chatMessagesRef = useRef(null);
 
   useEffect(() => {
@@ -43,8 +43,7 @@ function App() {
       const data = await res.json();
       setMessages([...messages, { text: input, sender: 'user' }]);
 
-      // Simulate Hikari typing by waiting for a short delay
-      await sleep(600); // Adjust this value for the desired typing delay
+      await sleep(600);
 
       setMessages([...messages, { text: input, sender: 'user' }, { text: data.response, sender: 'chatbot' }]);
       setInput('');
@@ -52,59 +51,31 @@ function App() {
       console.error('Error:', error);
     }
   };
-  
-  // Conditionally render components based on the token
-  const token = localStorage.getItem('token');
 
-  if (!token) {
-    return (
-      <div>
-        <Register />
-        <Login />
-      </div>
-    );
-  }
+  const toggleAuth = () => {
+    setShowAuth(!showAuth);
+  };
+
+  const authButton = (
+    <Button variant="contained" color="secondary" onClick={toggleAuth} disableElevation>
+      {showAuth ? 'Hide Auth' : 'Show Auth'}
+    </Button>
+  );
 
   return (
     <div className="chatbot-container">
+      {authButton}
+      {showAuth && (
+        <div>
+          <Register />
+          <Login />
+        </div>
+      )}
       <div className="chatbot-header">
-        <img src="https://www.kindpng.com/picc/m/24-241830_mq-girl-pokemon-chibi-pikachu-cute-chibi-anime.png" alt="Cute anime character" style={{ width: '100px', height: '100px' }}></img>
-        <h1 className="chatbot-title">Magic Shop with Hikari</h1>
+        {/* ... rest of the code */}
       </div>
       <div className="chatbot-body">
-        <div className="chat-messages" ref={chatMessagesRef}>
-          {messages.map((message, index) => (
-            <div className={`chat-message ${message.sender}`} key={index}>
-              {message.sender === 'chatbot' && (
-                <img
-                  src="https://www.kindpng.com/picc/m/24-241830_mq-girl-pokemon-chibi-pikachu-cute-chibi-anime.png"
-                  alt="Cute anime character"
-                  className="chatbot-avatar"
-                />
-              )}
-              <p>{message.text}</p>
-            </div>
-          ))}
-        </div>
-        <form onSubmit={handleMessage} className="chatbot-form">
-          <TextField
-            label="Your message"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            InputProps={{
-              style: {
-                background: '#fff',
-                borderRadius: '24px',
-              },
-            }}
-          />
-          <Button variant="contained" color="primary" type="submit" disableElevation>
-            Send
-          </Button>
-        </form>
+        {/* ... rest of the code */}
       </div>
     </div>
   );

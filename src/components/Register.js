@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 
 function Register() {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleRegister = async (e) => {
@@ -12,7 +13,7 @@ function Register() {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, email, password }),
     };
 
     try {
@@ -35,6 +36,14 @@ function Register() {
           label="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          fullWidth
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           fullWidth
           margin="normal"
           variant="outlined"
