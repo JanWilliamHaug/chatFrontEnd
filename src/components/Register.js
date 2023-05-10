@@ -21,7 +21,13 @@ function Register() {
         body: JSON.stringify({ username, email, password }),
       });
   
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+        return;
+      }
   
       if (response.ok) {
         console.log("Registration successful:", data);
@@ -32,6 +38,7 @@ function Register() {
       console.error('Error:', error);
     }
   };
+  
   
   
   
